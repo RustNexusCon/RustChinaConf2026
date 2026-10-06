@@ -1,0 +1,519 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RustChinaConf 2026 议程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#F1F2F7; --surface:#FFFFFF; --surface-2:#E8EAF2; --ink:#131A38; --ink-2:#464D6E; --muted:#73789A; --line:#D8DBE7;
+  --accent:#C9581A; --accent-ink:#FFFFFF; --accent-soft:#FBE4D3;
+  --t1:#C9581A; --t1-soft:#FBE4D3; --t2:#2672B3; --t2-soft:#DCEBF8; --t3:#97680D; --t3-soft:#F5EAD0;
+  --night:#0B1028; --night-2:#141B3D; --dusk:#F28C3A;
+  --bar:rgba(241,242,247,.88);
+  --display:"Oswald","Noto Sans SC","PingFang SC",sans-serif;
+  --body:"IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --tcol:108px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0A0F26; --surface:#121939; --surface-2:#1A2248; --ink:#ECEEF8; --ink-2:#B3B8D3; --muted:#8389A8; --line:#262F57;
+    --accent:#F59A4A; --accent-ink:#1A0E05; --accent-soft:rgba(245,154,74,.16);
+    --t1:#F59A4A; --t1-soft:rgba(245,154,74,.15); --t2:#62B4F0; --t2-soft:rgba(98,180,240,.15); --t3:#E5B85C; --t3-soft:rgba(229,184,92,.15);
+    --bar:rgba(10,15,38,.86);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0A0F26; --surface:#121939; --surface-2:#1A2248; --ink:#ECEEF8; --ink-2:#B3B8D3; --muted:#8389A8; --line:#262F57;
+  --accent:#F59A4A; --accent-ink:#1A0E05; --accent-soft:rgba(245,154,74,.16);
+  --t1:#F59A4A; --t1-soft:rgba(245,154,74,.15); --t2:#62B4F0; --t2-soft:rgba(98,180,240,.15); --t3:#E5B85C; --t3-soft:rgba(229,184,92,.15);
+  --bar:rgba(10,15,38,.86);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,3vw,32px)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+
+/* hero */
+.hero{background:var(--night);display:flex;justify-content:center}
+.hero img{display:block;width:100%;max-width:1600px;aspect-ratio:1600/620;object-fit:cover;object-position:50% 46%}
+.intro{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;padding-block:28px 22px}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font:600 clamp(34px,5vw,54px)/1.05 var(--display);margin:0;letter-spacing:.01em;text-wrap:balance}
+.lede{margin:10px 0 0;color:var(--ink-2);max-width:60ch}
+.facts{display:flex;flex-wrap:wrap;gap:6px 26px;margin:0}
+.facts div{display:flex;align-items:baseline;gap:7px}
+.facts dt{font:500 30px/1 var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.facts dd{margin:0;color:var(--muted);font-size:13px}
+
+/* toolbar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bar);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-block:1px solid var(--line)}
+.bar-in{display:flex;flex-direction:column;gap:10px;padding-block:10px}
+.row-a,.row-b{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.days{display:flex;gap:6px;flex:1 1 auto;min-width:0}
+.day-btn{display:flex;align-items:baseline;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;text-align:left;flex:1 1 0;min-width:0}
+.day-btn .d{font:500 22px/1 var(--display);font-variant-numeric:tabular-nums}
+.day-btn .n{font-size:12.5px;color:var(--muted);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day-btn[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.day-btn[aria-selected="true"] .n{color:inherit;opacity:.75}
+.tools{display:flex;gap:6px}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font-size:13.5px;white-space:nowrap}
+.icon-btn svg{width:16px;height:16px}
+.icon-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.icon-btn[aria-pressed="true"] svg{fill:var(--accent);stroke:var(--accent)}
+.lang{font-weight:600;min-width:52px;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:13px;white-space:nowrap}
+.chip .dot{width:9px;height:9px;border-radius:2px;background:var(--c,var(--ink-2))}
+.chip[aria-pressed="true"]{background:var(--surface);border-color:var(--c,var(--ink));box-shadow:inset 0 0 0 1px var(--c,var(--ink))}
+.day{scroll-margin-top:calc(var(--barh,120px) + 16px);margin-bottom:64px}
+.day-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;padding-bottom:12px;margin-bottom:22px;border-bottom:2px solid var(--ink)}
+.day-h .dd{font:600 clamp(36px,5vw,48px)/1 var(--display);font-variant-numeric:tabular-nums}
+.day-h .dn{font:500 19px/1.2 var(--display);color:var(--ink-2);letter-spacing:.01em}
+.search{flex:1 1 220px;min-width:0;position:relative}
+.search input{width:100%;height:36px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:0 12px 0 34px;font:inherit;font-size:14px}
+.search svg{position:absolute;left:11px;top:10px;width:16px;height:16px;stroke:var(--muted);fill:none}
+
+/* schedule */
+main{padding-block:26px 40px}
+.block{margin-block:0 36px}
+.block-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:0 0 12px}
+.block-h h2{font:600 24px/1.2 var(--display);margin:0;letter-spacing:.01em}
+.block-h p{margin:0;color:var(--muted);font-size:13.5px}
+.time{font:600 14px/1.4 var(--mono);color:var(--ink-2);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+.p-list{border-top:1px solid var(--line)}
+.p-row{display:grid;grid-template-columns:var(--tcol) 1fr;gap:18px;padding-block:14px;border-bottom:1px solid var(--line)}
+.p-row.ev .ttl{font-weight:600}
+.p-row.brk{padding-block:9px}
+.p-row.brk .time,.p-row.brk .ttl{color:var(--muted);font-weight:400;font-size:13.5px}
+.p-row.has-talk .time{color:var(--accent);font-size:14px;white-space:nowrap}
+.p-row .talk{background:none;border:0;padding:0}
+.p-row .talk-title{font-size:21px}
+.p-row .av{width:56px;height:56px}
+.p-row .talk .abs{max-width:72ch}
+
+.aside{display:grid;grid-template-columns:var(--tcol) 1fr;gap:18px;padding:12px 0;margin-bottom:14px;border:1px dashed var(--line);border-radius:10px;padding-inline:14px}
+.aside .k{font:600 11.5px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.aside b{display:block}
+.aside span{color:var(--ink-2);font-size:13.5px}
+
+.grid{--n:3}
+.g-head,.g-row{display:grid;grid-template-columns:var(--tcol) repeat(var(--n),minmax(0,1fr));gap:12px}
+.g-head{padding-bottom:10px;border-bottom:1px solid var(--line)}
+.g-head .th{display:flex;flex-direction:column;gap:1px;padding-left:2px}
+.g-head .th b{font:600 13px/1.3 var(--mono);color:var(--c)}
+.g-head .th span{font:500 18px/1.2 var(--display);letter-spacing:.01em}
+.g-row{padding-block:12px;border-bottom:1px solid var(--line);align-items:stretch}
+.g-row>.time{padding-top:14px}
+.g-row.brk{padding-block:8px}
+.g-row.brk .time,.g-row.brk .lbl{color:var(--muted);font-size:13.5px;font-weight:400;padding-top:0}
+.g-row.brk .lbl{grid-column:2/-1}
+.cell{display:flex;flex-direction:column;gap:10px;min-width:0}
+.cell.cont{justify-content:center;align-items:flex-start;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px}
+
+.talk{position:relative;display:flex;flex-direction:column;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 14px 12px;min-width:0;height:100%}
+.talk.is-now{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding-right:30px;min-height:22px}
+.trk{font:600 11px/1 var(--mono);padding:5px 7px;border-radius:4px;background:var(--cs);color:var(--c);letter-spacing:.02em}
+.tag{font:600 11px/1 var(--mono);padding:5px 7px;border-radius:4px;background:var(--ink);color:var(--bg);text-transform:uppercase;letter-spacing:.06em;display:inline-flex;gap:4px;align-items:center}
+.tag svg{width:11px;height:11px;fill:currentColor}
+.meta .tm{font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.now{display:none;font:600 11px/1 var(--mono);padding:5px 7px;border-radius:4px;background:var(--accent);color:var(--accent-ink)}
+.is-now .now{display:inline-block}
+.star{position:absolute;top:8px;right:8px;width:30px;height:30px;display:grid;place-items:center;border:0;background:none;border-radius:6px;cursor:pointer;color:var(--muted)}
+.star svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+.star:hover{background:var(--surface-2)}
+.star[aria-pressed="true"]{color:var(--accent)}
+.star[aria-pressed="true"] svg{fill:var(--accent)}
+.talk-title{font:600 16.5px/1.38 var(--body);margin:0;text-wrap:pretty;letter-spacing:-.005em}
+.spks{display:flex;flex-direction:column;gap:8px}
+.spk{display:flex;gap:10px;align-items:center;min-width:0}
+.av{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;background:var(--surface-2)}
+.spk b{display:block;font-weight:600;font-size:14px;line-height:1.3}
+.spk small{display:block;overflow-wrap:anywhere;color:var(--muted);font-size:12.5px;line-height:1.4}
+.host{font-size:13px;color:var(--ink-2)}
+details{margin-top:auto}
+summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:500;list-style:none;display:inline-flex;align-items:center;gap:4px;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(-45deg);transition:transform .15s;margin-right:3px}
+details[open] summary::before{transform:rotate(45deg)}
+.abs{margin:8px 0 0;font-size:14px;color:var(--ink-2);line-height:1.7}
+.bio{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.6;padding-top:8px;border-top:1px solid var(--line)}
+.bio b{color:var(--ink-2);font-weight:600}
+
+.lset{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:var(--t2-soft);height:100%}
+.lset-h{display:flex;align-items:center;gap:6px;font:600 12px/1.2 var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.06em;padding:2px 2px 0}
+.lset-h svg{width:13px;height:13px;fill:currentColor}
+.lset .talk{height:auto;padding:10px 12px}
+.lset .talk-title{font-size:14.5px}
+.lset .av{width:32px;height:32px}
+
+[data-track="T1"]{--c:var(--t1);--cs:var(--t1-soft)}
+[data-track="T2"]{--c:var(--t2);--cs:var(--t2-soft)}
+[data-track="T3"]{--c:var(--t3);--cs:var(--t3-soft)}
+
+/* day 0 */
+.venues{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:start}
+.venue{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 18px 8px}
+.venue h3{font:600 22px/1.2 var(--display);margin:0;letter-spacing:.01em}
+.venue .addr{margin:4px 0 0;color:var(--muted);font-size:13px}
+.venue .addr a{color:inherit}
+.sec{margin-top:18px}
+.sec h4{margin:0 0 4px;font-size:15px;font-weight:600}
+.sec .sub{margin:0 0 8px;color:var(--muted);font-size:13px}
+.sec .p-list{border-top:1px solid var(--line)}
+.venue .p-row{grid-template-columns:96px 1fr;gap:14px;padding-block:10px}
+.venue .p-row:last-child{border-bottom:0}
+.ws{font:600 11px/1 var(--mono);padding:4px 6px;border-radius:4px;background:var(--accent);color:var(--accent-ink);margin-right:6px;vertical-align:2px}
+.desc{display:block;color:var(--ink-2);font-size:13.5px;margin-top:3px;font-weight:400}
+.ct{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13.5px;font-weight:400}
+.ct li{padding-left:14px;position:relative;color:var(--ink-2)}
+.ct li::before{content:"";position:absolute;left:2px;top:.65em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.ct li b{color:var(--ink)}
+.note{margin:0 0 16px;padding:10px 14px;border-radius:10px;background:var(--accent-soft);font-size:13.5px;color:var(--ink)}
+
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+.empty .others{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+/* venue footer */
+.foot{border-top:1px solid var(--line);padding-block:28px 40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.foot h3{font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 8px}
+.foot p{margin:0;font-size:14px;color:var(--ink-2)}
+.foot p b{color:var(--ink);display:block;font-size:15px}
+.foot a{color:var(--accent)}
+
+@media (max-width: 900px){
+  :root{--tcol:78px}
+  .g-head{display:none}
+  .g-row{display:flex;flex-direction:column;gap:10px}
+  .g-row>.time{padding-top:0;color:var(--accent);font-size:15px}
+  .g-row.brk{flex-direction:row;gap:12px}
+  .cell:empty{display:none}
+  .talk{height:auto}
+  .lset{height:auto}
+  .venues{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+}
+@media (max-width: 560px){
+  .bar-in{flex-direction:row;flex-wrap:wrap;gap:8px;padding-block:8px}
+  .row-a,.row-b{display:contents}
+  .days{order:1;flex-basis:100%}
+  .tools{order:2;flex:none}
+  .search{order:3;flex:1 1 120px}
+  .chips{order:4;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+  .chips::-webkit-scrollbar{display:none}
+  .icon-btn{padding:0 10px}
+  .day-btn .n{white-space:normal}
+  .day-btn{flex-direction:column;gap:3px;padding:7px 9px}
+  .day-btn .d{font-size:19px}
+  .p-row,.aside{grid-template-columns:1fr;gap:4px}
+  .venue .p-row{grid-template-columns:1fr;gap:2px}
+  .p-row .talk-title{font-size:18px}
+  .hero img{aspect-ratio:16/9;object-position:28% 50%}
+  .tools .lbl{display:none}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header class="hero"><img id="kv" src="__KV__" alt="RustChinaConf Shenzhen 2026 主视觉：October 15–17, 2026 · Shenzhen, China · Co-located with GOSIM Shenzhen 2026"></header>
+
+<section class="wrap intro">
+  <div>
+    <p class="eyebrow" data-i="eyebrow"></p>
+    <h1 data-i="h1"></h1>
+    <p class="lede" data-i="lede"></p>
+  </div>
+  <dl class="facts" id="facts"></dl>
+</section>
+
+<nav class="bar" aria-label="Schedule controls">
+  <div class="wrap bar-in">
+    <div class="row-a">
+      <div class="days" role="tablist" id="days"></div>
+      <div class="tools">
+        <button class="icon-btn" id="starOnly" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg><span class="lbl" data-i="starred"></span><span id="starCount"></span></button>
+        <button class="icon-btn" id="openAll" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span class="lbl" data-i="abstracts"></span></button>
+        <button class="icon-btn lang" id="lang" aria-label="Switch language"></button>
+      </div>
+    </div>
+    <div class="row-b">
+      <div class="chips" id="chips"></div>
+      <label class="search"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" autocomplete="off"></label>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="main"></main>
+
+<footer class="wrap foot" id="foot"></footer>
+
+<script>
+/*__DATA__*/
+
+const UI={
+  eyebrow:{zh:'2026.10.15 – 10.17 · 深圳',en:'Oct 15–17, 2026 · Shenzhen'},
+  h1:{zh:'RustChinaConf 2026 大会议程',en:'RustChinaConf 2026 Schedule'},
+  lede:{zh:'深圳南山伊敦酒店 · 与 GOSIM Shenzhen 2026 同期举办。主会两天上午为并厅主会场，下午分 Rust for AI、AI for Rust、Rust in Production 三条轨道。',
+        en:'ADEN Hotel Shenzhen Nanshan, co-located with GOSIM Shenzhen 2026. Both main days open with a joint plenary, then split into three afternoon tracks: Rust for AI, AI for Rust, and Rust in Production.'},
+  starred:{zh:'我的收藏',en:'My picks'},
+  abstracts:{zh:'展开全部',en:'Expand all'},
+  search:{zh:'搜索讲师、议题或关键词，如 Tokio、vLLM',en:'Search speakers, talks or keywords, e.g. Tokio, vLLM'},
+  all:{zh:'全部轨道',en:'All tracks'},
+  details:{zh:'议题介绍与讲师简介',en:'Abstract & speaker bio'},
+  star:{zh:'收藏此议题',en:'Save this talk'},
+  now:{zh:'进行中',en:'Now'},
+  morning:{zh:'上午 · 并厅主会场',en:'Morning · Joint Plenary'},
+  afternoon:{zh:'下午 · 三轨分会场',en:'Afternoon · Three Tracks'},
+  closing:{zh:'闭幕',en:'Closing'},
+  afternoonNote:{zh:'同一时段三场并行，按轨道选择会场。',en:'Three talks run in parallel in each slot.'},
+  noMatch:{zh:'没有匹配的议题。',en:'No matching talks.'},
+  noStars:{zh:'还没有收藏。点击议题卡片右上角的星标即可加入「我的收藏」，收藏只保存在本机浏览器。',en:'Nothing saved yet. Tap the star on any talk to add it to My picks. Picks are stored in this browser only.'},
+  panelCont:{zh:'圆桌讨论持续至 17:15',en:'Panel continues until 17:15'},
+  lightning:{zh:'闪电演讲 · 3 × 10 分钟',en:'Lightning talks · 3 × 10 min'},
+  parallel:{zh:'并行闭门',en:'Parallel · Closed'},
+};
+const TAGS={keynote:{zh:'主题演讲',en:'Keynote'},demo:{zh:'特别演示',en:'Special Demo'},fireside:{zh:'炉边对话',en:'Fireside Chat'},lightning:{zh:'闪电',en:'Lightning'},panel:{zh:'圆桌讨论',en:'Panel'}};
+const TRACKS={
+  T1:{zh:'Rust for AI',en:'Rust for AI'},
+  T2:{zh:'AI for Rust',en:'AI for Rust'},
+  T3:{zh:'Rust in Production',en:'Rust in Production'},
+};
+const DAYS=[
+  {id:0,date:'2026-10-15',d:'10.15',wd:{zh:'周四',en:'Thu'},name:{zh:'Workshop Day',en:'Workshop Day'}},
+  {id:1,date:'2026-10-16',d:'10.16',wd:{zh:'周五',en:'Fri'},name:{zh:'主会 Day 1',en:'Main Day 1'}},
+  {id:2,date:'2026-10-17',d:'10.17',wd:{zh:'周六',en:'Sat'},name:{zh:'主会 Day 2',en:'Main Day 2'}},
+];
+const T=(zh,en)=>({zh,en});
+const PLENARY={
+  1:{pre:[
+      ['09:30–10:15','ev',T('GOSIM Keynote','GOSIM Keynote')],
+      ['10:15–10:25','ev',T('RustChinaConf 开场','RustChinaConf Opening')],
+      ['10:25–10:27','ev',T('钻石赞助商演讲','Diamond Sponsor Remarks')],
+      ['10:57–11:05','brk',T('走廊交流','Hallway Break')],
+      ['12:00–14:00','brk',T('午餐','Lunch')],
+    ],
+    breaks:[['14:30–14:40',T('走廊时间','Hallway Break')],['15:10–15:15',T('转场','Transition')],['15:45–16:00',T('茶歇','Tea Break')],['16:30–16:35',T('转场','Transition')],['17:05',T('下午议程结束，各厅收尾','Afternoon sessions end · Track wrap-up')]],
+    post:[]},
+  2:{pre:[
+      ['09:30–10:15','ev',T('GOSIM Keynote','GOSIM Keynote')],
+      ['10:15–10:20','ev',T('Day 2 开场 + 钻石赞助商演讲','Day 2 Opening + Diamond Sponsor Remarks')],
+      ['12:10–14:00','brk',T('午餐','Lunch')],
+    ],
+    aside:{time:'09:30–17:00',title:T('开放原子旋武开源社区｜Rust 师资培训与教学研讨会','OpenAtom Xuanwu Open Source Community · Rust Faculty Training & Teaching Workshop'),
+           note:T('与主会并行的闭门研讨会，全天进行。','A closed-door workshop running in parallel with the main program all day.')},
+    breaks:[['14:30–14:40',T('走廊时间','Hallway Break')],['15:10–15:15',T('转场','Transition')],['15:45–16:00',T('茶歇','Tea Break')],['16:30–16:35',T('转场','Transition')],['17:05–17:10',T('转场（T2 / T3）','Transition (T2 / T3)')]],
+    post:[
+      ['17:40–17:45','brk',T('移步启航 1 厅','Move to Qihang Hall 1')],
+      ['17:45–17:50','ev',T('闭幕演讲 · 启航 1 厅','Closing Remarks · Qihang Hall 1')],
+      ['17:50–18:10','brk',T('致谢、散场','Thanks & Departure')],
+    ]},
+};
+const DAY0={
+  note:T('全天免费，报名审核制。两个场地相距约 40 分钟车程，下午场次报名时请按场地二选一。','Free all day; registration is reviewed. The two venues are about 40 minutes apart by car, so choose one venue for the afternoon when you register.'),
+  venues:[
+    {name:T('ONES 会场','ONES Venue'),addr:T('南山区高新南十道 16 号金地威新中心 A 座 20 层','20F, Tower A, Jindi Weixin Center, 16 Gaoxin South 10th Rd, Nanshan'),
+     secs:[
+      {h:T('上午 · Omarchy Shenzhen 社区 Meetup','Morning · Omarchy Shenzhen Community Meetup'),items:[
+        ['09:30–10:00','brk',T('签到 + 咖啡，贴纸交换桌开放','Check-in & coffee · sticker swap table opens')],
+        ['10:00–10:10','ev',T('开场 · ONES 欢迎致辞','Opening · Welcome from ONES'),T('主持人定调：终端为什么在 Agent 时代回归，以及全天动线','Host intro: why the terminal is back in the agent era, and the plan for the day')],
+        ['10:10–10:35','ev',T('Omarchy Live 秀 · 3 × 6 分钟','Omarchy Live Showcase · 3 × 6 min'),T('演示位征集中','Demo slots open for submissions')],
+        ['10:35–10:50','brk',T('茶歇 + 主题讨论：Omarchy 与 Agent OS','Break + discussion: Omarchy and Agent OS')],
+        ['10:50–12:30','ev',T('社区议题 · 4 × 10 分钟','Community talks · 4 × 10 min'),null,[
+          T('<b>我为啥敢用 Omarchy 做主力机：可恢复，能掌控，自然进化</b> · Nero（钱迹团队）：配置、数据、快照全套方案，以及把外屏问题回馈上游','<b>Why I Trust Omarchy as My Daily Driver: Recoverable, Controllable, Naturally Evolving</b> · Nero (Qianji team): a full setup for config, data and snapshots, and getting an external-display bug fixed upstream'),
+          T('<b>Omarchy China：官方镜像与本地化服务介绍</b> · Alex Zhang：官方已上线中国镜像与本地化服务，介绍其能力与使用方式','<b>Omarchy China: Official Mirror and Localization Services</b> · Alex Zhang: what the newly launched China mirror and localization services offer, and how to use them'),
+          T('<b>公开征集位</b>：优先 Omarchy 优秀插件、Hyprland 中文输入法 fcitx5、Agent CLI 工作流（10 月 8 日截止）','<b>Open call</b>: Omarchy plugins, Chinese input on Hyprland with fcitx5, agent CLI workflows (deadline Oct 8)'),
+        ]],
+        ['12:30–13:30','brk',T('合影 + 自由交流','Group photo & networking')],
+      ]},
+      {h:T('下午 · Rust AI Coding Workshop','Afternoon · Rust AI Coding Workshop'),items:[
+        ['13:00–14:00','brk',T('签到 + 次日 RustChinaConf 2026 主会预告','Check-in + preview of the RustChinaConf 2026 main conference')],
+        ['14:00–16:00','ws',T('AI Coding Rust 实战：从手工编码到 AI Coding，我们丧失了编程的乐趣吗？','Hands-on AI Coding with Rust: From Manual Coding to AI Coding, Have We Lost the Joy of Programming?'),T('以 computer use agent 为案例：spec 驱动、四类翻车的围堵，以及 Libra 航迹回放。','A computer-use agent case study: spec-driven development, containing four kinds of failure, and replaying the run with Libra.'),null,'W1'],
+        ['16:00–16:15','brk',T('茶歇','Tea Break')],
+        ['16:15–18:15','ws',T('嵌入式 Rust 实战：让 AI 给你手里的板子改功能','Hands-on Embedded Rust: Let AI Add Features to the Board in Your Hand'),T('vibekeys-max 真板：hello world → 联网录音 → AI 改固件并 OTA 刷回。两人一板结对，20 块板可租借，可成本价购买，另有 2 块作为奖品。','On a real vibekeys-max board: hello world → networked audio recording → AI-modified firmware flashed back over OTA. Pairs share a board; 20 boards to borrow, boards at cost, and 2 boards as prizes.'),null,'W2'],
+      ]},
+     ]},
+    {name:T('伊敦酒店会场','ADEN Hotel Venue'),addr:T('深圳南山伊敦酒店 · 蛇口龟山路 8 号 · 地铁 12 号线海上世界站','ADEN Hotel Shenzhen Nanshan · 8 Guishan Rd, Shekou · Metro Line 12, Sea World Station'),
+     secs:[
+      {h:T('下午 · Solana 专场','Afternoon · Solana Session'),sub:T('Solana 是 Rust 基金会白金成员','Solana is a Platinum Member of the Rust Foundation'),items:[
+        ['13:00–13:30','brk',T('签到','Check-in')],
+        ['13:30–14:30','ev',T('Solana for Rustaceans','Solana for Rustaceans')],
+        ['14:30–15:30','ev',T('区块链世界在发生什么：Rust 开发者的新机会','What Is Happening in Blockchain: New Opportunities for Rust Developers')],
+        ['15:30–15:50','brk',T('茶歇','Tea Break')],
+        ['15:50–16:50','ev',T('Solana 小课堂：一起开发你的第一个区块链应用','Solana Mini-Class: Build Your First Blockchain App Together')],
+        ['16:50–17:50','ev',T('Career Fair','Career Fair')],
+      ]},
+     ]},
+  ],
+};
+const FOOT=[
+  [T('主会场','Main venue'),T('<b>深圳南山伊敦酒店</b>蛇口龟山路 8 号，邻近地铁 12 号线海上世界站。<br><a href="https://aden-nanshan.hotel-shenzhen.com/zh/" target="_blank" rel="noopener">酒店主页</a>','<b>ADEN Hotel Shenzhen Nanshan</b>8 Guishan Rd, Shekou, near Sea World Station on Metro Line 12.<br><a href="https://aden-nanshan.hotel-shenzhen.com/zh/" target="_blank" rel="noopener">Hotel website</a>')],
+  [T('10.15 Workshop 会场','Oct 15 workshop venues'),T('<b>ONES 会场</b>南山区高新南十道 16 号金地威新中心 A 座 20 层。Solana 专场在伊敦酒店。','<b>ONES Venue</b>20F, Tower A, Jindi Weixin Center, 16 Gaoxin South 10th Rd, Nanshan. The Solana session is at the ADEN Hotel.')],
+  [T('说明','Notes'),T('<b>与 GOSIM Shenzhen 2026 同期</b>议程可能微调，以大会现场公告为准。收藏仅保存在本机浏览器。','<b>Co-located with GOSIM Shenzhen 2026</b>The schedule may change; on-site announcements take precedence. Your picks are stored in this browser only.')],
+];
+
+/* ---------- state ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const nav=(navigator.language||'zh').toLowerCase();
+const S={lang:store.get('rcc26-lang',nav.startsWith('zh')?'zh':'en'),day:0,track:'all',q:'',starOnly:false,open:false,stars:new Set(store.get('rcc26-stars',[]))};
+const tz8=()=>{const d=new Date(Date.now()+8*3600e3);return{date:d.toISOString().slice(0,10),min:d.getUTCHours()*60+d.getUTCMinutes()}};
+{const h=(location.hash||'').match(/^#day([012])$/);const n=tz8();const live=DAYS.find(d=>d.date===n.date);
+ var START=h?+h[1]:live?live.id:null;}
+
+const L=o=>o==null?'':typeof o==='string'?o:(o[S.lang]??o.zh);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const md=s=>esc(s).replace(/`([^`]+)`/g,'<code>$1</code>');
+const toMin=s=>{const [h,m]=s.split(':').map(Number);return h*60+m};
+const STAR='<svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>';
+const BOLT='<svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>';
+const SEARCH={};
+const BYID=Object.fromEntries(TALKS.map(k=>[k.id,k]));
+TALKS.forEach(k=>{SEARCH[k.id]=[k.title.zh,k.title.en,k.abs.zh,k.abs.en,k.host&&k.host.zh,k.host&&k.host.en,...k.speakers.flatMap(s=>[s.name.zh,s.name.en,s.role.zh,s.role.en])].filter(Boolean).join(' ').toLowerCase()});
+
+function isNow(day,time){const n=tz8();if(DAYS[day].date!==n.date)return false;const [a,b]=time.split('–');return b&&n.min>=toMin(a)&&n.min<toMin(b)}
+
+function card(k,{showTrack=true}={}){
+  const on=S.stars.has(k.id), now=isNow(k.day,k.time);
+  const spk=k.speakers.map(s=>`<div class="spk">${s.av?`<img class="av" src="${AV[s.av]}" alt="" loading="lazy">`:''}<div><b>${esc(L(s.name))}</b><small>${esc(L(s.role))}</small></div></div>`).join('');
+  const bios=k.speakers.map(s=>`<p class="bio"><b>${esc(L(s.name))}</b> · ${esc(L(s.bio))}</p>`).join('');
+  return `<article class="talk${now?' is-now':''}" data-id="${k.id}" data-track="${k.track}">
+    <div class="meta">${showTrack&&k.track!=='P'?`<span class="trk">${k.track} · ${esc(L(TRACKS[k.track]))}</span>`:''}${k.tag?`<span class="tag">${k.tag==='lightning'?BOLT:''}${esc(L(TAGS[k.tag]))}</span>`:''}${k.track==='P'?'':`<span class="tm">${k.time}</span>`}<span class="now">${L(UI.now)}</span></div>
+    <button class="star" aria-pressed="${on}" aria-label="${esc(L(UI.star))}" title="${esc(L(UI.star))}">${STAR}</button>
+    <h3 class="talk-title">${md(L(k.title))}</h3>
+    ${spk?`<div class="spks">${spk}</div>`:''}
+    ${k.host?`<div class="host">${esc(L(k.host))}</div>`:''}
+    <details${S.open?' open':''}><summary>${esc(L(UI.details))}</summary><p class="abs">${md(L(k.abs))}</p>${bios}</details>
+  </article>`;
+}
+function pRow([time,kind,title,desc,list,ws]){
+  return `<div class="p-row ${kind==='brk'?'brk':'ev'}"><div class="time">${time}</div><div class="ttl">${ws?`<span class="ws">${ws}</span>`:''}${esc(L(title))}${desc?`<span class="desc">${esc(L(desc))}</span>`:''}${list?`<ul class="ct">${list.map(x=>`<li>${L(x)}</li>`).join('')}</ul>`:''}</div></div>`;
+}
+function plenaryList(items){
+  return `<div class="p-list">${items.sort((a,b)=>toMin(a.t)-toMin(b.t)).map(x=>x.k
+    ?`<div class="p-row has-talk" data-row="talk"><div class="time">${x.k.time}</div>${card(x.k,{showTrack:false})}</div>`
+    :pRow(x.r).replace('class="p-row','data-row="fixed" class="p-row')).join('')}</div>`;
+}
+function renderDay0(){
+  return `<p class="note">${esc(L(DAY0.note))}</p><div class="venues">${DAY0.venues.map(v=>`<section class="venue"><h3>${esc(L(v.name))}</h3><p class="addr">${esc(L(v.addr))}</p>${v.secs.map(s=>`<div class="sec"><h4>${esc(L(s.h))}</h4>${s.sub?`<p class="sub">${esc(L(s.sub))}</p>`:''}<div class="p-list">${s.items.map(pRow).join('')}</div></div>`).join('')}</section>`).join('')}</div>`;
+}
+function renderMainDay(d){
+  const P=PLENARY[d], talks=TALKS.filter(k=>k.day===d);
+  const morning=[...P.pre.map(r=>({t:r[0].slice(0,5),r})),...talks.filter(k=>k.track==='P').map(k=>({t:k.time.slice(0,5),k}))];
+  const slots={};
+  talks.filter(k=>k.track!=='P').forEach(k=>{(slots[k.slot]??={})[k.track]??=[];slots[k.slot][k.track].push(k)});
+  const rows=[...Object.keys(slots).map(s=>({t:s,s})),...P.breaks.map(b=>({t:b[0].slice(0,5),b}))].sort((a,b)=>toMin(a.t)-toMin(b.t));
+  const grid=rows.map(r=>{
+    if(r.b)return `<div class="g-row brk" data-row="fixed"><div class="time">${r.b[0]}</div><div class="lbl">${esc(L(r.b[1]))}</div></div>`;
+    const cells=['T1','T2','T3'].map(tr=>{
+      const ks=slots[r.s][tr]||[];
+      if(!ks.length)return d===2&&r.s==='17:10'&&tr==='T1'?`<div class="cell cont" data-track="T1">${esc(L(UI.panelCont))}</div>`:`<div class="cell" data-track="${tr}"></div>`;
+      if(ks.every(k=>k.tag==='lightning'))return `<div class="cell" data-track="${tr}"><div class="lset"><div class="lset-h">${BOLT}${esc(L(UI.lightning))}</div>${ks.map(k=>card(k)).join('')}</div></div>`;
+      return `<div class="cell" data-track="${tr}">${ks.map(k=>card(k)).join('')}</div>`;
+    }).join('');
+    return `<div class="g-row" data-row="talks"><div class="time">${r.s}</div>${cells}</div>`;
+  }).join('');
+  const head=`<div class="g-head"><div></div>${['T1','T2','T3'].map(tr=>`<div class="th" data-track="${tr}"><b>${tr}</b><span>${esc(L(TRACKS[tr]))}</span></div>`).join('')}</div>`;
+  const aside=P.aside?`<div class="aside" data-row="fixed"><div class="k">${esc(L(UI.parallel))}<br>${P.aside.time}</div><div><b>${esc(L(P.aside.title))}</b><span>${esc(L(P.aside.note))}</span></div></div>`:'';
+  return `<section class="block"><div class="block-h"><h2>${esc(L(UI.morning))}</h2></div>${aside}${plenaryList(morning)}</section>
+    <section class="block"><div class="block-h"><h2>${esc(L(UI.afternoon))}</h2><p>${esc(L(UI.afternoonNote))}</p></div><div class="grid">${head}${grid}</div></section>
+    ${P.post.length?`<section class="block"><div class="block-h"><h2>${esc(L(UI.closing))}</h2></div>${plenaryList(P.post.map(r=>({t:r[0].slice(0,5),r})))}</section>`:''}
+`;
+}
+
+/* ---------- render ---------- */
+const $=s=>document.querySelector(s);
+function renderChrome(){
+  document.documentElement.lang=S.lang==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-i]').forEach(el=>el.textContent=L(UI[el.dataset.i]));
+  $('#lang').textContent=S.lang==='zh'?'EN':'中文';
+  $('#q').placeholder=L(UI.search);
+  $('#q').setAttribute('aria-label',L(UI.search));
+  $('#starOnly').setAttribute('aria-label',L(UI.starred));
+  $('#openAll').setAttribute('aria-label',L(UI.abstracts));
+  $('#facts').innerHTML=[['3',T('天','days')],['41',T('场主会议题','main-stage sessions')],['3',T('条分会场轨道','tracks')],['3',T('场 Day 0 专场','Day 0 programs')]].map(([n,l])=>`<div><dt>${n}</dt><dd>${esc(L(l))}</dd></div>`).join('');
+  $('#days').innerHTML=DAYS.map(d=>`<button class="day-btn" role="tab" aria-selected="${d.id===S.day}" data-day="${d.id}"><span class="d">${d.d}</span><span class="n">${esc(L(d.wd))} · ${esc(L(d.name))}</span></button>`).join('');
+  $('#chips').innerHTML=[['all',UI.all],...Object.entries(TRACKS).map(([k,v])=>[k,v])].map(([k,v])=>`<button class="chip" ${k==='all'?'':`data-track="${k}"`} data-chip="${k}" aria-pressed="${S.track===k}">${k==='all'?'':'<span class="dot"></span>'}${k==='all'?'':k+' · '}${esc(L(v))}</button>`).join('');
+  $('#starCount').textContent=S.stars.size?`(${S.stars.size})`:'';
+  $('#starOnly').setAttribute('aria-pressed',S.starOnly);
+  $('#openAll').setAttribute('aria-pressed',S.open);
+  $('#foot').innerHTML=FOOT.map(([h,p])=>`<div><h3>${esc(L(h))}</h3><p>${L(p)}</p></div>`).join('');
+}
+function render(){
+  renderChrome();
+  $('#main').innerHTML='<div class="empty" id="empty" hidden></div>'+DAYS.map(d=>`<section class="day" id="day${d.id}" data-sec="${d.id}"><header class="day-h"><span class="dd">${d.d}</span><span class="dn">${esc(L(d.wd))} · ${esc(L(d.name))}</span></header>${d.id===0?renderDay0():renderMainDay(d.id)}</section>`).join('');
+  apply();
+}
+function matches(k){
+  if(S.starOnly&&!S.stars.has(k.id))return false;
+  const q=S.q.trim().toLowerCase();
+  return !q||q.split(/\s+/).every(w=>SEARCH[k.id].includes(w));
+}
+function apply(){
+  const filtering=!!(S.starOnly||S.q.trim());
+  document.querySelectorAll('#main .talk').forEach(el=>{el.hidden=!matches(BYID[el.dataset.id])});
+  document.querySelectorAll('#main .grid').forEach(grid=>{
+    grid.style.setProperty('--n',S.track==='all'?3:1);
+    grid.querySelectorAll('[data-track]').forEach(el=>{if(!el.closest('.talk'))el.hidden=S.track!=='all'&&el.dataset.track!==S.track});
+    grid.querySelectorAll('.lset').forEach(el=>{el.hidden=!el.querySelector('.talk:not([hidden])')});
+  });
+  document.querySelectorAll('#main [data-row]').forEach(row=>{
+    const kind=row.dataset.row;
+    if(kind==='fixed'){row.hidden=filtering;return}
+    if(kind==='talk'){row.hidden=row.querySelector('.talk').hidden;return}
+    row.hidden=![...row.querySelectorAll('.cell:not([hidden]) .talk')].some(t=>!t.hidden);
+  });
+  document.querySelectorAll('#main .block').forEach(b=>{const rows=b.querySelectorAll('[data-row]');b.hidden=filtering&&rows.length>0&&[...rows].every(r=>r.hidden)});
+  document.querySelectorAll('#main .day').forEach(sec=>{sec.hidden=filtering&&![...sec.querySelectorAll('[data-row]')].some(r=>!r.hidden)});
+  const vis=TALKS.filter(k=>matches(k)&&(S.track==='all'||k.track===S.track||k.track==='P')).length;
+  const empty=$('#empty');
+  if(filtering&&!vis){empty.innerHTML=`<p>${esc(S.starOnly&&!S.stars.size?L(UI.noStars):L(UI.noMatch))}</p>`;empty.hidden=false}
+  else empty.hidden=true;
+  spy();
+}
+function selectDay(id){S.day=id;document.querySelectorAll('.day-btn').forEach(x=>x.setAttribute('aria-selected',+x.dataset.day===id))}
+function goDay(id,smooth=true){
+  const sec=document.getElementById('day'+id);if(!sec||sec.hidden)return;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  sec.scrollIntoView({behavior:smooth&&!reduce?'smooth':'auto',block:'start'});
+  selectDay(id);
+  try{history.replaceState(null,'','#day'+id)}catch(_){}
+}
+function spy(){
+  const line=$('.bar').getBoundingClientRect().bottom+40;let cur=null;
+  document.querySelectorAll('#main .day').forEach(s=>{if(!s.hidden&&(cur==null||s.getBoundingClientRect().top<=line))cur=+s.dataset.sec});
+  if(cur!=null&&cur!==S.day)selectDay(cur);
+}
+const setBar=()=>document.documentElement.style.setProperty('--barh',$('.bar').offsetHeight+'px');
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.day!=null){goDay(+b.dataset.day);return}
+  if(b.dataset.chip){S.track=b.dataset.chip;renderChrome();apply();return}
+  if(b.classList.contains('star')){
+    const id=b.closest('.talk').dataset.id;
+    S.stars.has(id)?S.stars.delete(id):S.stars.add(id);
+    store.set('rcc26-stars',[...S.stars]);
+    b.setAttribute('aria-pressed',S.stars.has(id));
+    $('#starCount').textContent=S.stars.size?`(${S.stars.size})`:'';
+    if(S.starOnly)apply();
+    return;
+  }
+  if(b.id==='starOnly'){S.starOnly=!S.starOnly;renderChrome();apply();return}
+  if(b.id==='openAll'){S.open=!S.open;b.setAttribute('aria-pressed',S.open);document.querySelectorAll('#main details').forEach(d=>d.open=S.open);return}
+  if(b.id==='lang'){S.lang=S.lang==='zh'?'en':'zh';store.set('rcc26-lang',S.lang);render();setBar();return}
+});
+$('#q').addEventListener('input',e=>{S.q=e.target.value;apply()});
+window.addEventListener('hashchange',()=>{const h=location.hash.match(/^#day([012])$/);if(h)goDay(+h[1])});
+addEventListener('scroll',()=>requestAnimationFrame(spy),{passive:true});
+addEventListener('resize',setBar);
+setInterval(()=>document.querySelectorAll('#main .talk').forEach(el=>{const k=BYID[el.dataset.id];el.classList.toggle('is-now',isNow(k.day,k.time))}),60000);
+render();setBar();
+if(START!=null)requestAnimationFrame(()=>goDay(START,false));
+</script>
