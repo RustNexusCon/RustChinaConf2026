@@ -21,9 +21,6 @@ TAGS = [  # (tag, zh title prefix, en title prefix) — prefix is stripped and s
     ('panel', r'^🔥 圆桌讨论：', r'^🔥 Panel: '),
     ('fireside', r'^炉边对话：', r'^Fireside Chat: '),
 ]
-# The tables give the three lightning talks one shared block; the 2026-10-06 revision splits it into 10-minute slots.
-LIGHTNING = {'allen': '16:35–16:45', '半糖': '16:45–16:55', '杨鸿亦': '16:55–17:05'}
-NAME_FIXES = {'杨鸿奕': '杨鸿亦'}  # confirmed spelling, matches the photo file name
 
 
 def rows(path):
@@ -49,12 +46,6 @@ def br(s):
     return [p.strip() for p in s.split('<br>')]
 
 
-def fix_name(s):
-    for a, b in NAME_FIXES.items():
-        s = s.replace(a, b)
-    return s
-
-
 def parse_talks():
     zh_rows = rows(os.path.join(REPO, 'data/talks-zh.md'))
     en_rows = rows(os.path.join(REPO, 'data/talks-en.md'))
@@ -72,7 +63,7 @@ def parse_talks():
             if re.match(pz, tz):
                 tag, tz, te = name, re.sub(pz, '', tz), re.sub(pe, '', te)
                 break
-        avs = [fix_name(a) for a in re.findall(r'讲师头像/([^¦\]]+?)\.(?:jpe?g|png)', z[2])]
+        avs = [a for a in re.findall(r'讲师头像/([^¦\]]+?)\.(?:jpe?g|png)', z[2])]
         names_z, names_e = br(z[3]), br(e[3])
         host = None
         if names_z[0].startswith('主持'):  # panel: moderator only
@@ -86,7 +77,7 @@ def parse_talks():
             nz, ne = names_z[0].split(' + '), names_e[0].split(' + ')
             rz, ren = br(z[6]), br(e[6])
             for j, (a, b) in enumerate(zip(nz, ne)):
-                speakers.append({'name': {'zh': fix_name(a), 'en': b},
+                speakers.append({'name': {'zh': a, 'en': b},
                                  'role': {'zh': re.sub(r'^\w+：', '', rz[j] if j < len(rz) else ''),
                                           'en': re.sub(r'^\w+: ', '', ren[j] if j < len(ren) else '')},
                                  'bio': {'zh': z[7], 'en': e[7]},
@@ -97,12 +88,14 @@ def parse_talks():
             speakers[1]['bio'] = {'zh': 'Servo 贡献者，Formal Web 开发者。',
                                   'en': 'Servo contributor and developer of Formal Web.'}
         slot = time.split('–')[0]
-        if tag == 'lightning' and avs and avs[0] in LIGHTNING:
-            time, slot = LIGHTNING[avs[0]], '16:35'
         talks.append({'id': f'd{day}-{track}-{time[:5].replace(":", "")}-{i}', 'day': day, 'time': time,
                       'slot': slot, 'track': track, 'tag': tag,
                       'title': {'zh': tz, 'en': te}, 'abs': {'zh': z[5], 'en': e[5]},
                       'speakers': speakers, 'host': host})
+    # consecutive lightning talks in one track share a single grid slot, starting with the first of them
+    for k in talks:
+        if k['tag'] == 'lightning':
+            k['slot'] = min(x['slot'] for x in talks if x['tag'] == 'lightning' and x['day'] == k['day'] and x['track'] == k['track'])
     return talks
 
 

@@ -25,5 +25,5 @@ RustChinaConf 2026 大会议程网页（中英双语）· Bilingual schedule for
    macOS 用自带的 `sips` 压缩头像，其他系统需要 `pip install pillow`。
 3. 提交并推送到 `main`。GitHub Actions（`.github/workflows/pages.yml`）会重新构建并发布到 Pages。
 
-`build.py` 中的特殊处理：闪电演讲拆成 3 个 10 分钟时段（`LIGHTNING`）、姓名更正（`NAME_FIXES`），
+`build.py` 中的特殊处理：同一分会场相邻的闪电演讲合并为一个时段显示，各自时间直接写在表中；
 以及议题前缀（K1、特别演示、⚡、炉边对话、圆桌）转为标签显示（`TAGS`）。
